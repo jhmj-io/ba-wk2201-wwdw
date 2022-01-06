@@ -44,15 +44,6 @@ async function onhashchange(){
 
 }
 
-window.addEventListener("hashchange", onhashchange, false);
-
-async function fetchSession(){
-    
-    console.log("fetchSession")
-}
-
-document.getElementById("userlogin").addEventListener("click", login)
-
 
 // async function articleonchange(){
 //     // const uservoornemensform = articleuservoornemensread()
@@ -208,6 +199,13 @@ function articleuservoornemensread(){
     return form
 }
 
-onhashchange() // start
 
+window.onload = ()=>{
 
+    window.addEventListener("hashchange", onhashchange, false);
+
+    document.getElementById("userlogin").addEventListener("click", fetchSession)
+
+    onhashchange() // start
+
+}

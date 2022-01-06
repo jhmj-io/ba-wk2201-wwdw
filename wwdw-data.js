@@ -33,6 +33,8 @@ const fetchData = async ( lambda = LAMBDA, article ) => {
 
 function fetchSession() {
 
+    console.log("fetchSession")
+
     const sessionid = "dws123456789aabb"
 
     const expiry_sec = 365 * 24 * 60 * 60 ;
