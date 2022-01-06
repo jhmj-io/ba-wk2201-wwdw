@@ -1,0 +1,125 @@
+/* wwdw */
+
+:root {
+    --bodymarginleftright: 5%;
+    --margintop: 163px;
+    --marginbottom: 80px;
+    --wwdwgrey: teal;
+    --wwdwsilver: mintcream;
+}
+
+
+body{
+    font-family: 'Courier New', Courier, monospace;
+
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: var(--wwdwsilver);
+}
+
+
+
+header, footer, article, nav  {
+    padding: 1em var(--bodymarginleftright) 1em var(--bodymarginleftright ) ;
+}
+
+
+/* nav */
+
+nav {
+    padding: 0.5em var(--bodymarginleftright) 0.2em calc( var(--bodymarginleftright) + 4px );
+}
+nav, nav a {
+    color: var(--wwdwgrey)
+}
+
+
+/* header */
+
+header {
+    display: flex;
+    align-items:top ;
+    justify-content: space-between;
+    background-color: var(--wwdwgrey);
+}
+
+header > div {
+    display: flex;
+    flex-direction: column;
+}
+
+header > div * {
+    margin: 0.2em;
+}
+
+header h1, header p {
+    color: white;
+    padding-right: 2em;
+}
+
+header h1  {
+    letter-spacing: -1px;
+}
+
+header p, header input, header button {
+    margin: 0.5em;
+    line-height: 1.5em;
+}
+header input {
+    text-align: center;
+}
+
+/* footer */
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: lightblue;
+    /* background-color: yellow; */
+}
+
+footer span, footer a  {
+    vertical-align: middle;
+    margin-right: 1em;
+    color: var(--wwdwgrey);
+}
+
+footer>span:nth-child(1) {
+    /* fix for ㋛ */
+    position: relative;
+    top: -2px;
+}
+
+
+/* article */
+
+article {
+    padding-top: 10px;
+    color: red;
+    height:100%;
+}
+
+
+article div {
+    border: solid 1px orange;
+    margin: 2px;
+}
+
+article > div {
+    border: solid 1px red;
+}
+
+article a {
+    color: var(--wwdwgrey);
+    margin-right: 0.5em;
+    text-decoration: none;
+}
+
+
