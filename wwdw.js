@@ -1,6 +1,6 @@
 // wwdw.js
 
-//import { fetchData, fetchSession } from './wwdw-data.js';
+import { fetchData, fetchSession } from './wwdw-data.js';
 
 
 function navs( crumbs=[] ){

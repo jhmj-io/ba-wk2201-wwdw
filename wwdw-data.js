@@ -45,4 +45,4 @@ function fetchSession() {
 }
 
 
-//export { fetchData, fetchSession };
+export { fetchData, fetchSession };
