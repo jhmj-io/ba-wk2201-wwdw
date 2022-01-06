@@ -1,6 +1,6 @@
 // wwdw.js
 
-import { fetchData, fetchSession } from './wwdw-data.js';
+import { fetchData, fetchSession, fetchSessionClear, fetchSessionLoad } from './wwdw-data.js';
 
 
 function navs( crumbs=[] ){
@@ -30,12 +30,9 @@ async function onhashchange(){
 
     const documenthash = (window.location.hash.split("/").length) ? window.location.hash.split("/")[1] : null
 
-    console.log("hashchange", documenthash)
-
     if (documenthash) {
-        const crumb = await articleuservoornemensmake( documenthash )
-        // crum...
-        navs([{nav: "poeh", href: "#/poeh"}])
+        const user = await articleuservoornemensmake( documenthash )
+        navs([{nav: user["username"], href: "#/" + user["wwdwid"]}])
     }
     else  {
         await articleusernamesls()
@@ -43,13 +40,6 @@ async function onhashchange(){
     }
 
 }
-
-
-// async function articleonchange(){
-//     // const uservoornemensform = articleuservoornemensread()
-//     // console.log("uservoornemensform", uservoornemensform)
-// }
-// document.querySelectorAll("article>*").addEventListener("change", articleonchange)
 
 
 function btndelclick(e){
@@ -116,31 +106,6 @@ function mkvoornemen(vns, i, article) {
 
 }
 
-async function articleusernamesls(){
-
-    const users = await fetchData()
-
-    const article = document.querySelector("article")
-    article.innerHTML = ""
-
-    const divusers = document.createElement("div")
-    article.append( divusers )
-
-    console.log("users", users)
-
-    for ( const u of users ) {
-
-        const divuser = document.createElement("a")
-
-        divuser.innerHTML = u.username
-        
-        divuser.setAttribute("href","#/"+u.wwdwid)
-        divusers.append(divuser)
-    }
-
-
-}
-
 
 // article - make
 async function articleuservoornemensmake(){
@@ -158,7 +123,9 @@ async function articleuservoornemensmake(){
     const btnvoornemennew = document.createElement("button")
     btnvoornemennew.innerHTML = "nieuw voornemen"
 
+
     divuser.innerHTML = voornemens.username
+    divuser.setAttribute( "contenteditable", true )
 
     divuser.append( btndel() )
     divuser.append(btnvoornemennew)
@@ -172,10 +139,10 @@ async function articleuservoornemensmake(){
         vns = mkvoornemen( vns, i, article )
     }
 
-    // const uservoornemensform = articleuservoornemensread()
-    // console.log("uservoornemensform", uservoornemensform)
-
+    return voornemens
 }
+
+
 
 // article - read
 function articleuservoornemensread(){
@@ -200,11 +167,61 @@ function articleuservoornemensread(){
 }
 
 
+// article - ls
+async function articleusernamesls(){
+
+    // users
+    const users = await fetchData()
+
+
+    const article = document.querySelector("article")
+    article.innerHTML = ""
+
+    const divusers = document.createElement("div")
+    article.append( divusers )
+
+    console.log("users", users)
+
+    for ( const u of users ) {
+
+        const divuser = document.createElement("a")
+
+        divuser.innerHTML = u.username
+        
+        divuser.setAttribute("href","#/"+u.wwdwid)
+        divusers.append(divuser)
+    }
+
+
+}
+
+async function articleonchange(){
+
+    // const uservoornemensform = articleuservoornemensread()
+    // console.log("uservoornemensform", uservoornemensform)
+
+    console.log("articleonchange")
+}
+
+
+
 window.onload = ()=>{
 
-    window.addEventListener("hashchange", onhashchange, false);
 
-    document.getElementById("userlogin").addEventListener("click", fetchSession)
+    document.getElementById("loginsubmit").addEventListener("click", fetchSession)
+    document.getElementById("logoutsubmit").addEventListener("click", fetchSessionClear)
+
+    //document.querySelector("article>div").addEventListener("change", articleonchange)
+    //document.getElementsByTagName("article")[0].addEventListener("change", articleonchange)
+
+    document.getElementsByTagName("article")[0].addEventListener("input", inputEvt => {
+        console.log("input event fired");
+      }, false);
+
+
+    fetchSessionLoad(); // vóór onhashchange
+
+    window.addEventListener("hashchange", onhashchange, false);
 
     onhashchange() // start
 

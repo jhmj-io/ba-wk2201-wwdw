@@ -75,6 +75,11 @@ header input {
     text-align: center;
 }
 
+#login { display: flex; }
+#logout { display: none; }
+#logout input { color: red; }
+
+
 /* footer */
 
 footer {
@@ -121,5 +126,4 @@ article a {
     margin-right: 0.5em;
     text-decoration: none;
 }
-
 

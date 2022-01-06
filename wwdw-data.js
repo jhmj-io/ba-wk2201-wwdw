@@ -2,17 +2,19 @@
 
 const LAMBDA = 'https://8lgmayxgl6.execute-api.eu-central-1.amazonaws.com/default/wwdw'
 
-const fetchData = async ( lambda = LAMBDA, article ) => {
+async function fetchData( lambda = LAMBDA, article, loginname ) {
 
-    const cookiewwdw = document.cookie.split(";").find(c=>c.includes("sessionwwdw"))
-    const sessionwwdw = (cookiewwdw) ? cookiewwdw.split("=")[1] : null;
+    const cookiewwdw = document.cookie.split(";").find(c=>c.includes("wwdwsession"))
+    const wwdwsession = (cookiewwdw) ? cookiewwdw.split("=")[1] : undefined;
 
-    const documenthash = window.location.hash.split("/")[1] || undefined
+    let documenthash 
+    if (loginname!=="session") documenthash = window.location.hash.split("/")[1] ;
 
     const body = JSON.stringify({
-        sessionwwdw, 
-        documenthash,
-        article
+        documenthash: documenthash || undefined,
+        wwdwsession: wwdwsession || undefined, 
+        article: article || undefined,
+        loginname: loginname || undefined
     })
 
     console.log("fetchData req", body)
@@ -30,19 +32,55 @@ const fetchData = async ( lambda = LAMBDA, article ) => {
 
 };
 
+async function fetchSessionClear() {
 
-function fetchSession() {
 
-    console.log("fetchSession")
+    const expiry = new Date( "1970-01-01" );
 
-    const sessionid = "dws123456789aabb"
+    document.cookie=`wwdwsession=null;expires=${expiry.toUTCString()};`;
 
-    const expiry_sec = 365 * 24 * 60 * 60 ;
-    const expiry = new Date( new Date().getTime() + expiry_sec * 1000 ) ; // expiry in sec
+    document.location.hash = "#/"
 
-    document.cookie=`sessionwwdw=${sessionid};expires=${expiry.toUTCString()};`;
+    document.getElementById("login").style.display = "flex"
+    document.getElementById("logout").style.display = "none"
 
 }
 
+async function fetchSessionLoad() {
 
-export { fetchData, fetchSession };
+    const user = await fetchData ( LAMBDA, null, "session" ) 
+
+    if (user && user["wwdwid"]) {
+        document.getElementById("logoutusername").value = user["username"] || user["wwdwid"]
+        document.getElementById("login").style.display = "none"
+        document.getElementById("logout").style.display = "flex"
+    }
+}
+
+
+async function fetchSession() {
+
+    const loginname = document.getElementById("loginname").value 
+
+    const user = await fetchData ( LAMBDA, null, loginname ) 
+
+    console.log("fetchSession user", user)
+
+    const wwdwsession = user["wwdwsession"] 
+
+    const expiry_sec = 365 * 24 * 60 * 60 ;
+    const expiry = new Date( new Date().getTime() + expiry_sec * 1000 ) ; 
+
+    document.cookie=`wwdwsession=${wwdwsession};expires=${expiry.toUTCString()};`;
+
+    document.location.hash = "#/" + user["wwdwid"] 
+
+    // replace loginname with username, loginsubmit with logoutsubmit
+
+    document.getElementById("logoutusername").value = user["username"]
+    document.getElementById("login").style.display = "none"
+    document.getElementById("logout").style.display = "flex"
+
+}
+
+export { fetchData, fetchSession, fetchSessionClear, fetchSessionLoad };
