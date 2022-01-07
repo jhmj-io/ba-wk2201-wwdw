@@ -17,7 +17,7 @@ async function fetchData( lambda = LAMBDA, article, loginname ) {
         loginname: loginname || undefined
     })
 
-    console.log("fetchData req", body)
+    //console.log("fetchData req", body)
 
     const res = await fetch(lambda, {
         method: "POST",
@@ -27,6 +27,8 @@ async function fetchData( lambda = LAMBDA, article, loginname ) {
     const resjson = await res.json()
 
     //const resjson = await res.text()
+
+    //console.log("resjson", resjson)
 
     return resjson ;
 
@@ -38,8 +40,9 @@ async function fetchSessionClear() {
     const expiry = new Date( "1970-01-01" );
 
     document.cookie=`wwdwsession=null;expires=${expiry.toUTCString()};`;
+    document.getElementById("loginwwdwid").innerHTML=""
 
-    document.location.hash = "#/"
+    window.dispatchEvent(new HashChangeEvent("hashchange")); 
 
     document.getElementById("login").style.display = "flex"
     document.getElementById("logout").style.display = "none"
@@ -52,9 +55,11 @@ async function fetchSessionLoad() {
 
     if (user && user["wwdwid"]) {
         document.getElementById("logoutusername").value = user["username"] || user["wwdwid"]
+        document.getElementById("loginwwdwid").innerHTML = user["wwdwid"]
         document.getElementById("login").style.display = "none"
         document.getElementById("logout").style.display = "flex"
     }
+
 }
 
 
@@ -64,7 +69,7 @@ async function fetchSession() {
 
     const user = await fetchData ( LAMBDA, null, loginname ) 
 
-    console.log("fetchSession user", user)
+    //console.log("fetchSession user", user)
 
     const wwdwsession = user["wwdwsession"] 
 
@@ -73,11 +78,11 @@ async function fetchSession() {
 
     document.cookie=`wwdwsession=${wwdwsession};expires=${expiry.toUTCString()};`;
 
-    document.location.hash = "#/" + user["wwdwid"] 
-
-    // replace loginname with username, loginsubmit with logoutsubmit
+    if (!window.location.hash.split("/")[1]) document.location.hash = "#/" + user["wwdwid"]
+    else window.dispatchEvent(new HashChangeEvent("hashchange")); 
 
     document.getElementById("logoutusername").value = user["username"]
+    document.getElementById("loginwwdwid").innerHTML = user["wwdwid"]
     document.getElementById("login").style.display = "none"
     document.getElementById("logout").style.display = "flex"
 

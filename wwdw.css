@@ -34,6 +34,7 @@ header, footer, article, nav  {
 
 nav {
     padding: 0.5em var(--bodymarginleftright) 0.2em calc( var(--bodymarginleftright) + 4px );
+    margin-left:4px;
 }
 nav, nav a {
     color: var(--wwdwgrey)
@@ -78,7 +79,7 @@ header input {
 #login { display: flex; }
 #logout { display: none; }
 #logout input { color: red; }
-
+#loginwwdwid {display: none;}
 
 /* footer */
 
@@ -105,25 +106,73 @@ footer>span:nth-child(1) {
 
 /* article */
 
+
 article {
     padding-top: 10px;
-    color: red;
+    color: darkslategray;
     height:100%;
+    margin-left: 8px;
+    overflow-wrap: break-word;
 }
 
 
 article div {
-    border: solid 1px orange;
+    /* border: solid 1px orange; */
     margin: 2px;
 }
 
 article > div {
-    border: solid 1px red;
+    border-left: solid 2px var(--wwdwgrey);
+}
+
+article #divsubmit {
+    margin-top: 1em;
+    border-left: none;
+}
+
+article > div > div > div {
+    border-left: solid 2px lightblue;
+    padding-left: 3px;
 }
 
 article a {
     color: var(--wwdwgrey);
     margin-right: 0.5em;
     text-decoration: none;
+}
+
+article div input {
+    background-color: lightyellow;
+    width: 50%;
+}
+
+article>div:nth-child(1) {
+    padding: 2px;
+}
+
+article div label {
+    /* border: solid 2px blue; */
+    display: inline-block;
+    width: 8em;
+}
+
+article > div > div > div label {
+    /* border: solid 2px orange; */
+    width: calc( 8em - 7px ) !important;
+}
+
+
+article div[contenteditable=true]{
+    background-color: lightyellow;
+}
+
+article div label +div {
+    display: inline-block;
+    padding-right: 3em;
+    border: solid 1px green;
+}
+
+article .changestosubmit {
+    background-color: lightblue;
 }
 
