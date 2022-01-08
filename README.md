@@ -2,7 +2,7 @@
 Goede voornemens het hele jaar door - Wie Waagt die Wint
 
 ## Inleiding
-Het kernprobleem van  deze challenge is: de data moet "ergens" te bewonderen zijn. Liefst zou ik dat willen doen door te streamen naar [Digitale Buitenreclame](https://www.jcdecaux.nl/digitale-buitenreclame). Om dat voor elkaar te krijgen is  een bron voor streaming nodig. In eerste instantie gekeken naar [Netlify](https://www.netlify.com/). Netlify heeft geen Python optie. Omdat Netlify zijn/haar "ijzer" huurt bij [Amazon Web Services](https://aws.amazon.com/) bedacht om de bron voor (toekomstige) streaming rechtstreeks bij AWS onder te brengen. De aanpak van Netlify volgend gekozen voor Lambda Cloud Functions de en Simple Storage Service (S3) Cloud Storage.
+Het kernprobleem van  deze challenge is: de data moet "ergens" te bewonderen zijn. Liefst zou ik dat willen doen door te streamen naar [Digitale Buitenreclame](https://www.jcdecaux.nl/digitale-buitenreclame). Om dat voor elkaar te krijgen is een bron, internet toegankelijke data, voor streaming nodig. In eerste instantie gekeken naar [Netlify](https://www.netlify.com/). Netlify heeft geen Python optie. Omdat Netlify zijn/haar "ijzer" huurt bij [Amazon Web Services](https://aws.amazon.com/) bedacht om de bron voor (toekomstige) streaming rechtstreeks bij AWS onder te brengen. De aanpak van Netlify volgend gekozen voor Lambda Cloud Functions en de  Simple Storage Service (S3).
 Gebruikte talen en tooling: Python, Javascript, HTML, CSS, CloudFunctions en CloudStorage. Een werkende [live demo](https://jhmj-io.github.io/ba-wk2201-wwdw/) op github.io.
 
 
