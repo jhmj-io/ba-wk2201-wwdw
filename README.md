@@ -12,13 +12,13 @@ Het belangrijkste van deze uitwerking is data storage and retrieval. Daarvoor ee
 
         Het aantal regels code (NON BLANK)
         --------------------------------
-        40 lambda/lambda_function.py
-        95 lambda/usermethods.py
-        24 lambda/usersmethods.py
-        71 public/index.html
+         40 lambda/lambda_function.py
+         95 lambda/usermethods.py
+         24 lambda/usersmethods.py
+         71 public/index.html
         134 public/wwdw.css
         242 public/wwdw.js
-        56 public/wwdw-data.js
+         56 public/wwdw-data.js
         --------------------------------
         662 total
 
