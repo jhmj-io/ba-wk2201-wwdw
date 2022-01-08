@@ -10,6 +10,18 @@ Gebruikte talen en tooling: Python, Javascript, HTML, CSS, CloudFunctions en Clo
 ## Toelichting code
 Het belangrijkste van deze uitwerking is data storage and retrieval. Daarvoor een backend API gemaakt met Python AWS Lambda CloudFunctions en AWS S3 Cloud Storage. Omdat de data publiek te bewonderen is, zijn de data export API's (GET) publiek te gebruiken - geen authorisatie. Voor het gebruik van de storage API's (POST/PUT) is wel authorisatie nodig. Een op de server bekend sessie token. De Python code hiervoor  wordt besproken in het notebook [wwdw](https://github.com/jhmj-io/ba-wk2201-wwdw/blob/main/wwdw.ipynb). Gegevens uitwisseling van de [live demo](https://jhmj-io.github.io/ba-wk2201-wwdw/) met de [backend](https://8lgmayxgl6.execute-api.eu-central-1.amazonaws.com/default/wwdw) wordt gedaan met de [Web Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). De HTML, CSS en Javascript van de [live demo](https://jhmj-io.github.io/ba-wk2201-wwdw/) wordt niet besproken.
 
+        Het aantal regels code (NON BLANK)
+        --------------------------------
+        40 lambda/lambda_function.py
+        95 lambda/usermethods.py
+        24 lambda/usersmethods.py
+        71 public/index.html
+        134 public/wwdw.css
+        242 public/wwdw.js
+        56 public/wwdw-data.js
+        --------------------------------
+        662 total
+
 
 ## Challenge vragen - antwoorden
 
