@@ -157,7 +157,7 @@ article div label {
 }
 
 article > div > div > div label {
-    border: solid 2px orange;
+    /* border: solid 2px orange; */
     width: calc( 8em - 7px ) !important;
 }
 
