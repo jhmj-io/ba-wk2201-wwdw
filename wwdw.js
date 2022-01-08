@@ -23,16 +23,35 @@ function btndel() {
 }
 
 function btninsertvoornemen(e) {
-    console.log("btninsertvoornemen", e.target)
-    // 
+
+    const nwvoornemen = document.getElementById("warehouse").firstElementChild.cloneNode(true)
+
+    // console.log("target parent", e.target.parentNode)
+    
+    // console.log("nwvoornemen", e.target.parentNode.nextSibling )
+
+    e.target.parentNode.parentNode.insertBefore( nwvoornemen, e.target.parentNode.nextSibling )
+
+
 }
 
 function btninsertstep(e) {
-    console.log("btninsertstep", e.target)
+
+    const nwvoornemen = document.getElementById("warehouse").firstElementChild.cloneNode(true)
+
+    const nwstep = nwvoornemen.querySelector("div>div:nth-child(2)").firstElementChild
+    
+    e.target.parentNode.nextSibling.append( nwstep )
+
 }
 
 function btninsertthought(e) {
-    console.log("btninsertthought", e.target)
+    const nwvoornemen = document.getElementById("warehouse").firstElementChild.cloneNode(true)
+
+    const nwthought = nwvoornemen.querySelector("div>div:nth-child(3)").firstElementChild
+    
+    e.target.parentNode.nextSibling.nextSibling.append( nwthought )
+
 }
 
 function mkvoornemen(vns, i, article, change) {
@@ -66,12 +85,11 @@ function mkvoornemen(vns, i, article, change) {
         const btnvoornemennewthought = document.createElement("button")
         
         btnvoornemennewstep.innerHTML = 'nieuwe stap'
-        btnvoornemennewstep.setAttribute("disabled", true)
+        //btnvoornemennewstep.setAttribute("disabled", true)
         btnvoornemennewstep.addEventListener("click",btninsertstep )
 
         btnvoornemennewthought.innerHTML = 'nieuwe gedachte'
-        btnvoornemennewthought.setAttribute("disabled", true)
-
+        //btnvoornemennewthought.setAttribute("disabled", true)
         btnvoornemennewthought.addEventListener("click",btninsertthought )
 
         hdrvoornemen.append( btndel() )
@@ -151,7 +169,7 @@ async function articleuservoornemensread(){
 
             const btnvoornemennew = document.createElement("button")
             btnvoornemennew.innerHTML = "nieuw voornemen"
-            btnvoornemennew.setAttribute("disabled", true)
+            //btnvoornemennew.setAttribute("disabled", true)
             btnvoornemennew.addEventListener("click",btninsertvoornemen )
 
             divuser.append( btndel() )
@@ -220,8 +238,9 @@ async function articleuservoornemenswrite(){
 
     const username = document.getElementById("inputusername")
     article["username"] = (username) ? username.value : ""
- 
-    const vnms = Object.assign([], document.getElementsByName("voornemen"))
+
+    const articleel = document.getElementsByTagName("article")[0]
+    const vnms = Object.assign([], articleel.querySelectorAll('div[name="voornemen"]'))
     article["voornemen"] = vnms.reduce((a,v,i)=>{
 
         const voornemen = {}
